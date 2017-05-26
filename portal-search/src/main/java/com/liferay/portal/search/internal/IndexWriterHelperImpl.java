@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.model.CompanyConstants;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.IndexWriterHelper;
+import com.liferay.portal.kernel.search.IndexingThreadLocal;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchEngineHelper;
@@ -68,7 +69,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (document == null)) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(document == null)) {
+
 			return;
 		}
 
@@ -99,7 +102,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			Collection<Document> documents, boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
+		if (!IndexingThreadLocal.isIndexingEnabled() || isIndexReadOnly() ||
+			(documents == null) || documents.isEmpty()) {
+
 			return;
 		}
 
@@ -156,7 +161,7 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly()) {
+		if (!IndexingThreadLocal.isIndexingEnabled() || isIndexReadOnly()) {
 			return;
 		}
 
@@ -181,7 +186,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (uids == null) || uids.isEmpty()) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(uids == null) || uids.isEmpty()) {
+
 			return;
 		}
 
@@ -206,7 +213,7 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly()) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly()) {
 			return;
 		}
 
@@ -404,7 +411,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (document == null)) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(document == null)) {
+
 			return;
 		}
 
@@ -435,7 +444,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			Collection<Document> documents, boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(documents == null) || documents.isEmpty()) {
+
 			return;
 		}
 
@@ -536,7 +547,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (document == null)) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(document == null)) {
+
 			return;
 		}
 
@@ -569,7 +582,9 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 			Collection<Document> documents, boolean commitImmediately)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly() ||
+			(documents == null) || documents.isEmpty()) {
+
 			return;
 		}
 
@@ -598,7 +613,7 @@ public class IndexWriterHelperImpl implements IndexWriterHelper {
 
 	@Override
 	public void updatePermissionFields(String name, String primKey) {
-		if (isIndexReadOnly()) {
+		if (IndexingThreadLocal.isIndexingDisabled() || isIndexReadOnly()) {
 			return;
 		}
 
