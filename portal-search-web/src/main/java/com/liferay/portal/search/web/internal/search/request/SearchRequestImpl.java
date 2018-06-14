@@ -104,7 +104,7 @@ public class SearchRequestImpl implements SearchRequest {
 	protected SearchContext buildSearchContext() {
 		SearchContext searchContext = _searchContextBuilder.getSearchContext();
 
-		searchContext.setAttribute("filterExpired", true);
+		searchContext.setAttribute("filterExpired", Boolean.TRUE);
 		searchContext.setAttribute("paginationType", "more");
 
 		addScopeFacet(searchContext);
