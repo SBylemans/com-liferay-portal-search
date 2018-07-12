@@ -37,6 +37,8 @@ pageContext.setAttribute("portletURL", portletURL);
 	<aui:fieldset>
 		<aui:input cssClass="search-input" inlineField="<%= true %>" label="" name="keywords" placeholder="search" size="30" title="search" type="text" value="<%= HtmlUtil.escapeAttribute(searchDisplayContext.getKeywords()) %>" />
 
+		<button style="display:none" type="submit"></button>
+
 		<%
 		String taglibOnClick = "Liferay.Util.focusFormField('#" + renderResponse.getNamespace() + "keywords');";
 		%>
