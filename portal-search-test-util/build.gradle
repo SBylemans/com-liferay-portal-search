@@ -9,7 +9,7 @@ dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	compileOnly group: "junit", name: "junit", version: "4.12"
 	compileOnly group: "org.mockito", name: "mockito-core", version: "1.10.8"
-	compileOnly project(":apps:foundation:portal-search:portal-search")
+	compileOnly group: "com.liferay", name: "com.liferay.portal.search", version: "4.0.0"
 }
 
 liferay {
