@@ -14,7 +14,6 @@
 
 package com.liferay.portal.search.test.util.filter;
 
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Query;
@@ -68,23 +67,21 @@ public abstract class BaseTermsFilterTestCase extends BaseIndexingTestCase {
 
 		SearchContext searchContext = createSearchContext();
 
-		Hits hits = search(
-			searchContext,
-			booleanQuery -> setPreBooleanFilter(filter, booleanQuery));
+		Query query = getDefaultQuery();
+
+		BooleanFilter booleanFilter = new BooleanFilter();
+
+		booleanFilter.add(filter);
+
+		query.setPreBooleanFilter(booleanFilter);
+
+		Hits hits = search(searchContext, query);
 
 		DocumentsAssert.assertValues(
 			(String)searchContext.getAttribute("queryString"), hits.getDocs(),
 			fieldName, expectedValues);
 
 		return null;
-	}
-
-	protected void setPreBooleanFilter(Filter filter, Query query) {
-		BooleanFilter booleanFilter = new BooleanFilter();
-
-		booleanFilter.add(filter, BooleanClauseOccur.MUST);
-
-		query.setPreBooleanFilter(booleanFilter);
 	}
 
 }
