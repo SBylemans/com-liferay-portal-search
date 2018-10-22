@@ -22,8 +22,6 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public interface FilterBuilders {
 
-	public DateRangeFilterBuilder dateRangeFilterBuilder();
-
 	public TermsSetFilterBuilder termsSetFilterBuilder();
 
 }
